@@ -1,3 +1,4 @@
+let select = "all";
 const element = document.getElementById("sortOptions");
 
 /*Loads the data to the table on the data page by calling
@@ -13,20 +14,18 @@ element.addEventListener("click", loadTable);
 * if true, it executes the action requested i.e. ASC, DESC or revert to original state
 * else, it loads data in original order*/
 function loadTable() {
-    let select = document.getElementById("sortOptions").value;
     let text = "";
     let url = "";
 
-    if(select != undefined){
-        // it means that an option from the select is clicked,
-        // therefore we take the value of the element clicked and append
-        // it to the end of "api/v1/players/" to complete the url.
-        // The three possible values are: "sortASC", "sortDESC" and "all".
-        url = "api/v1/players/"+select;
-    }else {
-        //we assign the url variable link to the original format
-        url = "api/v1/players/all";
+    if(document.getElementById("sortOptions").value != undefined){
+        // checks if an option from the select is clicked.
+        // if clicked, we take the value of the element clicked.
+        select = document.getElementById("sortOptions").value;
     }
+    // We append the value to the end of "api/v1/players/" to complete the url.
+    // The three possible values are: "sortASC", "sortDESC" and "all".
+    url = "api/v1/players/"+select;
+
     //Data is fetched by calling methods from the PlayerList class
     // and then rendered in element with id "renderHere"
     fetch(url)
