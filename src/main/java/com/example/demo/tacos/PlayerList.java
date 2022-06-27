@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/v1/players")
 public class PlayerList {
+    //This method reads data from an XML file and then returns a linkedList list "List<Player>".
     @GetMapping("all")
     private List<Player> getPlayersFromXML(){
         List<Player> players = new LinkedList<>();
@@ -45,7 +46,7 @@ public class PlayerList {
     }
 
     @GetMapping("sortASC")
-    //This method takes a players list as a parameter, make a copy of the list then sort the copy in ASC order and return the copy.
+    //This method make a copy of the list then sort the copy in ASC order and returns the copy.
     public List<Player> sortASC(){
         List<Player> tempPlayers = copyList(getPlayersFromXML());
         tempPlayers.sort((p1, p2) -> p1.getNum() - p2.getNum());
@@ -53,14 +54,15 @@ public class PlayerList {
     }
 
     @GetMapping("sortDESC")
-    //This method takes a players list as a parameter, make a copy of the list then sort the copy in DESC order and return the copy.
+    //This method  make a copy of the list then sort the copy in DESC order and returns the copy.
     public List<Player> sortDESC(){
         List<Player> tempPlayers = copyList(getPlayersFromXML());
         tempPlayers.sort((p1, p2) -> p2.getNum() - p1.getNum());
         return tempPlayers;
     }
 
-    //This method is for copying one LinkedList to a new LinkedList to avoid making changes to the original List.
+    //This method is for copying one LinkedList to a new LinkedList to avoid
+    // making changes to the original List.
     private List<Player> copyList(List<Player> players) {
         return new LinkedList<>(players);
     }
