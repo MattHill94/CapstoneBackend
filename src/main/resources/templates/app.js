@@ -1,9 +1,8 @@
 window.addEventListener("load", loadTable);
 
 function loadTable() {
-    const url = `http://localhost:8090/api/v1/players/all`;
     let text = "";
-    fetch(url)
+    fetch("api/v1/players/all")
         .then(response => response.json())
         .then(function (object) {
             console.log(object);
