@@ -1,4 +1,5 @@
 let select = "all";
+let url = "";
 const element = document.getElementById("sortOptions");
 
 /*Loads the data to the table on the data page by calling
@@ -15,7 +16,6 @@ element.addEventListener("click", loadTable);
 * else, it loads data in original order*/
 function loadTable() {
     let text = "";
-    let url = "";
 
     if(document.getElementById("sortOptions").value != undefined){
         // checks if an option from the select is clicked.
@@ -43,6 +43,7 @@ function loadTable() {
         .catch((err) => {
             //catches err and displays "No data available"
             text += `No data available...`;
+            console.log(err);
             document.getElementById("renderHere").innerHTML = text;
         })
 }
