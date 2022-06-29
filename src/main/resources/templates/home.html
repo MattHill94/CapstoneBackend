@@ -54,20 +54,26 @@
 
 
 <div class="m-5">
-    <div class="btn-group" style="display: flex; width: 100%; align-items: center; justify-content: right;">
-        <!--                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"-->
-        <!--                            aria-expanded="false">-->
-        <!--                        Sort-->
-        <!--                    </button>-->
-        <!--                    <ul class="dropdown-menu" id="sortOptions">-->
-        <!--                        <li id="ASC" value="ASC"><a class="dropdown-item" href="#">Asc</a></li>-->
-        <!--                        <li id="DESC" value="DESC"><a class="dropdown-item" href="#">Dsc</a></li>-->
-        <!--                    </ul>-->
-        <select name="sortOptions" id="sortOptions">
+    <div style="display: flex; width: 100%; align-items: center; justify-content: right;">
+        <select name="sortOptions" id="sortOptions" style="height: 40px; margin-left: 1%;">
             <option value="all">Original</option>
             <option value="sortASC">Ascending</option>
             <option value="sortDESC">Descending</option>
         </select>
+        <div class="btn-group" style="height: 40px; width: 150px; margin-left: 1%; border-color: white;">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Export to PDF
+            </button>
+            <ul class="dropdown-menu" id="exportOptions">
+                <li id="ALL" value="all"><a class="dropdown-item" th:href="@{api/v1/players/ExportOriginal}">In
+                    Original Form</a></li>
+                <li id="ASC" value="ASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortASC}">In
+                    Ascending Order</a></li>
+                <li id="DESC" value="DESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortDESC}">In
+                    Descending Order</a></li>
+            </ul>
+        </div>
     </div>
     <table class="table pr-6">
         <thead>

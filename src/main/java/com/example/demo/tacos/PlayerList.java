@@ -1,12 +1,20 @@
 package com.example.demo.tacos;
+import com.lowagie.text.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -67,10 +75,30 @@ public class PlayerList {
         return new LinkedList<>(players);
     }
 
-    public void printList(List<Player> players) {
-        for (Player player: players
-        ) {
-            System.out.println("Name: "+player.getName()+"\tNumber: "+player.getNum());
-        }
+    @GetMapping("ExportOriginal")
+    public void exportToPDFOriginal(HttpServletResponse response) throws IOException {
+        exportToPDF(response, getPlayersFromXML());
+    }
+    @GetMapping("ExportSortASC")
+    public void exportToPDFASC(HttpServletResponse response) throws IOException {
+        exportToPDF(response, sortASC());
+    }
+    @GetMapping("ExportSortDESC")
+    public void exportToPDFDESC(HttpServletResponse response) throws IOException {
+        exportToPDF(response, sortDESC());
+    }
+    private void exportToPDF(HttpServletResponse response, List<Player> players) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=players_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<Player> listUsers = players;
+
+        DataPDFExporter exporter = new DataPDFExporter(listUsers);
+        exporter.export(response);
     }
 }

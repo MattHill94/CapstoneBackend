@@ -1,5 +1,6 @@
 let select = "all";
 let url = "";
+
 const element = document.getElementById("sortOptions");
 
 /*Loads the data to the table on the data page by calling
@@ -10,6 +11,8 @@ window.addEventListener("load", loadTable);
 the loadTable method when an option from the select combobox
 with id "sortOptions" is clicked*/
 element.addEventListener("click", loadTable);
+
+// exportPDF.addEventListener("click", exportTOPDF);
 
 /* The method first checks if was called by a click action from the comboBox
 * if true, it executes the action requested i.e. ASC, DESC or revert to original state
