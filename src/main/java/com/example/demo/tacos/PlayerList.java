@@ -23,7 +23,7 @@ import java.util.List;
 public class PlayerList {
     //This method reads data from an XML file and then returns a linkedList list "List<Player>".
     @GetMapping("all")
-    private List<Player> getPlayersFromXML(){
+    public List<Player> getPlayersFromXML(){
         List<Player> players = new LinkedList<>();
         try{
             File file = new File("../capstone/src/main/resources/data.xml");
