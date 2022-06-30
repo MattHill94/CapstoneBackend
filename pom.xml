@@ -91,9 +91,17 @@
 			<artifactId>maven-plugin-api</artifactId>
 			<version>3.8.5</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-clean-plugin</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.cloud.tools</groupId>
+			<artifactId>jib-maven-plugin</artifactId>
+			<version>3.2.1</version>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -103,18 +111,7 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
-				<version>2.5.2</version>
-				<configuration>
-					<from>
-						<image>openjdk:15</image>
-					</from>
-					<container>
-						<ports>
-							<port>8080</port>
-						</ports>
-						<format>OCI</format>
-					</container>
-				</configuration>
+				<version>3.2.1</version>
 			</plugin>
 		</plugins>
 	</build>
