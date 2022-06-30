@@ -12,6 +12,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,11 +30,13 @@ public class PlayerList {
     public List<Player> getPlayersFromXML(){
         List<Player> players = new LinkedList<>();
         try{
-            File file = new File("../capstone/src/main/resources/data.xml");
+            Path filePath = Paths.get("target/classes/data.xml");
+            File file = new File(String.valueOf(filePath.toAbsolutePath()));
+
             if (file.exists()) {
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-                Document document = documentBuilder.parse("../capstone/src/main/resources/data.xml");
+                Document document = documentBuilder.parse(String.valueOf(filePath.toAbsolutePath()));
 
                 //Gets the elements "Name" and "Numbers" from the data.xml file and add them to a node list
                 NodeList[] player = {document.getElementsByTagName("name"), document.getElementsByTagName("number")};
