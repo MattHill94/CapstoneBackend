@@ -57,8 +57,17 @@
     <div style="display: flex; width: 100%; align-items: center; justify-content: right;">
         <select class="btn-group" name="sortOptions" id="sortOptions" style="height: 40px; margin-left: 1%;">
             <option value="all">Original</option>
-            <option value="sortASC">Ascending</option>
-            <option value="sortDESC">Descending</option>
+            <option value="sortASC">Ascending By Num</option>
+            <option value="sortDESC">Descending By Num</option>
+
+
+
+            <!--    Sorting the web interface by percentage ascending descending        -->
+            <option value="sortPercASC">% Ascending</option>
+            <option value="sortPercDESC">% Descending</option>
+
+
+
         </select>
         <div class="btn-group" style="height: 40px; width: 150px; margin-left: 1%; border-color: white;">
             <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -66,20 +75,33 @@
                 Export to PDF
             </button>
             <ul class="dropdown-menu" id="exportOptions">
-                <li id="ALL" value="all"><a class="dropdown-item" th:href="@{api/v1/players/ExportOriginal}">In
+                <li id="ALL" value="all"><a class="dropdown-item" th:href="@{api/v1/players/ExportOriginal}">
                     Original Form</a></li>
-                <li id="ASC" value="ASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortASC}">In
-                    Ascending Order</a></li>
-                <li id="DESC" value="DESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortDESC}">In
-                    Descending Order</a></li>
+                <li id="ASC" value="ASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortASC}">
+                    Ascending By Num</a></li>
+                <li id="DESC" value="DESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortDESC}">
+                    Descending By Num</a></li>
+
+
+                <!--   These are export to pdf sorted byt Percentage in ascending and descending order             -->
+
+                <li id="PERCASC" value="PERCASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercASC}"> % in Asc </a></li>
+
+                <li id="PERCDESC" value="PERCDESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercDESC}"> % in Desc </a></li>
+
+
             </ul>
         </div>
     </div>
     <table class="table pr-6">
         <thead>
         <tr>
-            <th scope="col" class="col-6">Full Name</th>
-            <th scope="col" class="col-6">Number</th>
+            <th scope="col" class="col-3">Full Name</th>
+            <th scope="col" class="col-3">Number</th>
+
+            <!--   Percentage column         -->
+            <th scope="col" class="col-6">Task completion</th>
+
         </tr>
         </thead>
         <tbody id="renderHere">
@@ -87,6 +109,10 @@
         </tbody>
     </table>
 </div>
+
+
+
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
