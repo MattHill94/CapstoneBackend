@@ -39,6 +39,7 @@ function loadTable() {
                 text += "<tr>"+
                     "<td>"+object[objectKey].name+"</td>"+
                     "<td>"+object[objectKey].num+"</td>"+
+                    "<td>"+object[objectKey].percentage+"%</td>"+
                     "</tr>";
             }
             document.getElementById("renderHere").innerHTML = text;
@@ -49,4 +50,6 @@ function loadTable() {
             console.log(err);
             document.getElementById("renderHere").innerHTML = text;
         })
+
+
 }
