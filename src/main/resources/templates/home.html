@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
+
 </head>
 
 <body class="">
@@ -33,14 +34,18 @@
 </nav>
 
 <div class="p-5 bg-primary ">
-    <h1 class="display-4 text-center text-white mb-4"><u> A working title </u></h1>
+    <h1 class="display-4 text-center text-white mb-4"><u>CAPSTONE PROJECT</u></h1>
 
     <div class="container">
         <div class="row">
             <div class="col order-last"></div>
-            <div class="col-md-4">
+            <div class="col-md-4" style="width: 80%;">
                 <p class="text-white text-center">
-                    HEllo babou </p>
+                <h4 class="display-4 text-center text-white mb-4">Software Development Pipeline </h4></p>
+                <p class="text-white text-center">This web application reads an XML containing names
+                    and numbers and displays it on this page. Users can sort the data in either ascending
+                    or descending order and revert to the original state. </p>
+
             </div>
             <div class="col order-first"></div>
         </div>
@@ -49,43 +54,63 @@
 
 
 <div class="m-5">
+    <div style="display: flex; width: 100%; align-items: center; justify-content: right;">
+        <select class="btn-group" name="sortOptions" id="sortOptions" style="height: 40px; margin-left: 1%;">
+            <option value="all">Original</option>
+            <option value="sortASC">Ascending By Num</option>
+            <option value="sortDESC">Descending By Num</option>
+
+
+
+            <!--    Sorting the web interface by percentage ascending descending        -->
+            <option value="sortPercASC">% Ascending</option>
+            <option value="sortPercDESC">% Descending</option>
+
+
+
+        </select>
+        <div class="btn-group" style="height: 40px; width: 150px; margin-left: 1%; border-color: white;">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Export to PDF
+            </button>
+            <ul class="dropdown-menu" id="exportOptions">
+                <li id="ALL" value="all"><a class="dropdown-item" th:href="@{api/v1/players/ExportOriginal}">
+                    Original Form</a></li>
+                <li id="ASC" value="ASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortASC}">
+                    Ascending By Num</a></li>
+                <li id="DESC" value="DESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortDESC}">
+                    Descending By Num</a></li>
+
+
+                <!--   These are export to pdf sorted byt Percentage in ascending and descending order             -->
+
+                <li id="PERCASC" value="PERCASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercASC}"> % in Asc </a></li>
+
+                <li id="PERCDESC" value="PERCDESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercDESC}"> % in Desc </a></li>
+
+
+            </ul>
+        </div>
+    </div>
     <table class="table pr-6">
         <thead>
         <tr>
-            <th scope="col" class="col-2 ">First</th>
-            <th scope="col" class="col-8">Number</th>
-            <th scope="col" class="col-2">
-                <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        Sort
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Asc</a></li>
-                        <li><a class="dropdown-item" href="#">Dsc</a></li>
-                    </ul>
-                </div>
-            </th>
+            <th scope="col" class="col-3">Full Name</th>
+            <th scope="col" class="col-3">Number</th>
+
+            <!--   Percentage column         -->
+            <th scope="col" class="col-6">Task completion</th>
+
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>Mark</td>
-            <td>01</td>
-        </tr>
-        <tr>
-            <td>Jacob</td>
-            <td>02</td>
-        </tr>
-        <tr>
-            <td>Larry</td>
-            <td>03</td>
-        </tr>
+        <tbody id="renderHere">
+        <!--This is where the list of names and numbers from the XML file is rendered-->
         </tbody>
     </table>
-
-
 </div>
+
+
 
 
 <!-- Optional JavaScript -->
@@ -93,6 +118,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-
+<script src="js/app.js"></script>
 </body>
 </html>
