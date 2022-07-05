@@ -30,7 +30,7 @@ public class PlayerList {
     public List<Player> getPlayersFromXML(){
         List<Player> players = new LinkedList<>();
         try{
-            Path filePath = Paths.get("target/classes/data.xml");
+            Path filePath = Paths.get("data.xml");
             File file = new File(String.valueOf(filePath.toAbsolutePath()));
 
             if (file.exists()) {
