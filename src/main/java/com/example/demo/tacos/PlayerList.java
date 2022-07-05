@@ -28,7 +28,7 @@ public class PlayerList {
     public List<Player> getPlayersFromXML(){
         List<Player> players = new LinkedList<>();
         try{
-            Path filePath = Paths.get("data.xml");
+            Path filePath = Paths.get("target/classes/data.xml");
             File file = new File(String.valueOf(filePath.toAbsolutePath()));
 
             if (file.exists()) {
@@ -73,10 +73,6 @@ public class PlayerList {
         tempPlayers.sort((p1, p2) -> p2.getNum() - p1.getNum());
         return tempPlayers;
     }
-
-
-
-
 
     @GetMapping("sortPercASC")
     //This method make a copy of the list then sort the copy in ASC order and returns the copy.
@@ -127,11 +123,6 @@ public class PlayerList {
     public void ExportSortPercDESC(HttpServletResponse response) throws IOException {
         exportToPDF(response, sortPercDESC());
     }
-
-
-
-
-
 
 
 
