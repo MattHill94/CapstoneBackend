@@ -1,5 +1,6 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -15,100 +16,117 @@
 <body class="">
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <div class="container">
-        <a class="navbar-brand" href="/">Capstone</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            </ul>
-            <ul class="navbar-nav mb-2 mb-md-0">
-                <li class="nav-item text-white">
-                    Log in
-                </li>
-            </ul>
-        </div>
+  <div class="container">
+    <a class="navbar-brand" href="/">Capstone</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      </ul>
+      <ul class="navbar-nav mb-2 mb-md-0">
+        <li class="nav-item text-white">
+<!--          <a th:href="@{/login}" class="btn btn-outline-primary" > Log in </a>-->
+          <a sec:authorize="!hasAnyRole('USER', 'ADMIN')" th:href="@{/login}" class="btn btn-success" role="button" aria-pressed="true">Log in</a>
+        </li>
+        <li>
+          <form  method="POST" th:action="@{/logout}" id="logoutForm">
+            <input sec:authorize="hasAnyRole('USER', 'ADMIN')" type="submit" value="Logout" class="btn btn-danger" role="button" aria-pressed="true"/>
+          </form>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
 
 <div class="p-5 bg-primary ">
-    <h1 class="display-4 text-center text-white mb-4"><u>CAPSTONE PROJECT</u></h1>
-
-    <div class="container">
-        <div class="row">
-            <div class="col order-last"></div>
-            <div class="col-md-4" style="width: 80%;">
-                <p class="text-white text-center">
-                <h4 class="display-4 text-center text-white mb-4">Software Development Pipeline </h4></p>
-                <p class="text-white text-center">This web application reads an XML containing names
-                    and numbers and displays it on this page. Users can sort the data in either ascending
-                    or descending order and revert to the original state. </p>
-
-            </div>
-            <div class="col order-first"></div>
-        </div>
+  <h1 class="display-4 text-center text-white mb-4"><u>CAPSTONE PROJECT</u></h1>
+  <div class="container">
+    <div class="row">
+      <div class="col order-last"></div>
+      <div class="col-md-4" style="width: 80%;">
+        <p class="text-white text-center">
+        <h4 class="display-4 text-center text-white mb-4">Software Development Pipeline </h4></p>
+        <p class="text-white text-center">This web application reads an XML containing names
+          and numbers and displays it on this page. Users can sort the data in either ascending
+          or descending order and revert to the original state. </p>
+      </div>
+      <div class="col order-first"></div>
     </div>
+  </div>
 </div>
 
 
 <div class="m-5">
-    <div style="display: flex; width: 100%; align-items: center; justify-content: right;">
-        <select class="btn-group" name="sortOptions" id="sortOptions" style="height: 40px; margin-left: 1%;">
-            <option value="all">Original</option>
-            <option value="sortASC">Ascending By Num</option>
-            <option value="sortDESC">Descending By Num</option>
+  <div style="display: flex; width: 100%; align-items: center; justify-content: right;">
+    <select sec:authorize="hasAnyRole('USER', 'ADMIN')" class="btn-group" name="sortOptions" id="sortOptions" style="height: 40px; margin-left: 1%;">
+      <option value="all">Original</option>
+      <option value="sortASC">Ascending By Num</option>
+      <option value="sortDESC">Descending By Num</option>
 
 
 
-            <!--    Sorting the web interface by percentage ascending descending        -->
-            <option value="sortPercASC">% Ascending</option>
-            <option value="sortPercDESC">% Descending</option>
+      <!--    Sorting the web interface by percentage ascending descending        -->
+      <option value="sortPercASC">% Ascending</option>
+      <option value="sortPercDESC">% Descending</option>
 
 
 
-        </select>
-        <div class="btn-group" style="height: 40px; width: 150px; margin-left: 1%; border-color: white;">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                Export to PDF
-            </button>
-            <ul class="dropdown-menu" id="exportOptions">
-                <li id="ALL" value="all"><a class="dropdown-item" th:href="@{api/v1/players/ExportOriginal}">
-                    Original Form</a></li>
-                <li id="ASC" value="ASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortASC}">
-                    Ascending By Num</a></li>
-                <li id="DESC" value="DESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortDESC}">
-                    Descending By Num</a></li>
+    </select>
 
 
-                <!--   These are export to pdf sorted byt Percentage in ascending and descending order             -->
-
-                <li id="PERCASC" value="PERCASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercASC}"> % in Asc </a></li>
-
-                <li id="PERCDESC" value="PERCDESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercDESC}"> % in Desc </a></li>
-
-
-            </ul>
-        </div>
+    <div sec:authorize="hasRole('ADMIN')" class="btn-group" style="height: 40px; width: 150px; margin-left: 1%; border-color: white;">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+        Export to PDF
+      </button>
+      <ul class="dropdown-menu" id="exportOptions">
+        <li id="ALL" value="all"><a class="dropdown-item" th:href="@{api/v1/players/ExportOriginal}">
+          Original Form</a></li>
+        <li id="ASC" value="ASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortASC}">
+          Ascending By Num</a></li>
+        <li id="DESC" value="DESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortDESC}">
+          Descending By Num</a></li>
+        <!--   These are export to pdf sorted byt Percentage in ascending and descending order             -->
+        <li id="PERCASC" value="PERCASC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercASC}"> % in Asc </a></li>
+        <li id="PERCDESC" value="PERCDESC"><a class="dropdown-item" th:href="@{api/v1/players/ExportSortPercDESC}"> % in Desc </a></li>
+      </ul>
     </div>
-    <table class="table pr-6">
-        <thead>
-        <tr>
-            <th scope="col" class="col-3">Full Name</th>
-            <th scope="col" class="col-3">Number</th>
 
-            <!--   Percentage column         -->
-            <th scope="col" class="col-6">Task completion</th>
 
-        </tr>
-        </thead>
-        <tbody id="renderHere">
-        <!--This is where the list of names and numbers from the XML file is rendered-->
-        </tbody>
-    </table>
+
+
+  </div>
+
+  <table sec:authorize="hasAnyRole('USER', 'ADMIN')"  class="table pr-6">
+    <thead>
+    <tr>
+      <th scope="col" class="col-3">Full Name</th>
+      <th scope="col" class="col-3">Number</th>
+
+      <!--   Percentage column         -->
+      <th scope="col" class="col-6">Task completion</th>
+
+    </tr>
+    </thead>
+    <tbody sec:authorize="hasAnyRole('USER', 'ADMIN')" id="renderHere">
+    <!--This is where the list of names and numbers from the XML file is rendered-->
+    </tbody>
+  </table>
 </div>
+
+<div class="m-5">
+
+  <h2 sec:authorize="!hasAnyRole('USER', 'ADMIN')" class="text-center "> You need to log in to view the data! </h2>
+  <div class="text-center">
+    <a sec:authorize="!hasAnyRole('USER', 'ADMIN')" th:href="@{/login}" class="btn btn-success" role="button" aria-pressed="true">Log in</a>
+
+  </div>
+
+</div>
+
+
 
 
 

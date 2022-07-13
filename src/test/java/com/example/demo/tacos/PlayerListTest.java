@@ -1,6 +1,8 @@
 package com.example.demo.tacos;
 
 import org.junit.jupiter.api.Test;
+import project.troops.Player;
+import project.troops.PlayerList;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

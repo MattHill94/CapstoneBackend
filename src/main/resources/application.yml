@@ -1,0 +1,21 @@
+#spring:
+#  security:
+#    user:
+#      name: buzz
+#      password: infinity
+
+
+spring:
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/new_schema
+    username: root
+    password: Lcfc4lyf
+
+logging:
+  level:
+    tacos: WARN
+    
