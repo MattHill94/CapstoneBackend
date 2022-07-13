@@ -13,7 +13,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/new_schema
     username: root
-    password: Lcfc4lyf
+    password: "your password"
 
 logging:
   level:
