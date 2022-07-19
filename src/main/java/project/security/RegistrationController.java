@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.data.UserRepository;
 
+
+
+// This Class is not currently implemented into the project
+
+
 @Controller
+// Api end point for regustering
 @RequestMapping("/register")
 public class RegistrationController {
 
@@ -22,11 +28,13 @@ public class RegistrationController {
   }
   
   @GetMapping
+  // should return registration.html currently not implemented
   public String registerForm() {
     return "registration";
   }
   
   @PostMapping
+  // after processing the registration request will be redirected to the login page
   public String processRegistration(RegistrationForm form) {
     userRepo.save(form.toUser(passwordEncoder));
     return "redirect:/login";

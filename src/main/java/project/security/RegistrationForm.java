@@ -5,6 +5,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import project.User;
 
 @Data
+
+// These will be all the user details they would fill out if the registration page was implemented saved as a new user in the database
 public class RegistrationForm {
 
   private String username;

@@ -11,6 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
+
+
+
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -24,20 +28,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/home", "/login" )
             .access("hasAnyRole('USER', 'ADMIN')")
+            // anyone can access the login and home pages although the home page will not display any data
             .antMatchers("/login", "/home").access("permitAll")
-            //end::authorizeRequests[]
 
             .and()
             .formLogin()
             .loginPage("/login")
+            // after successful login you will be redirected to the homepage
             .defaultSuccessUrl("/home", true)
 
-            //end::customLoginPage[]
 
-            // tag::enableLogout[]
             .and()
             .logout()
             .logoutSuccessUrl("/")
+            // logout will take you back to the login page
             // end::enableLogout[]
 
             // Make H2-Console non-secured; for debug purposes
@@ -60,10 +64,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     ;
   }
 
+  // Password encocoder used for TESTING ONLY should use BCrypt for prod
   @Bean
   public PasswordEncoder encoder() {
     return new StandardPasswordEncoder("53cr3t");
   }
+
+
   
   
   @Override
