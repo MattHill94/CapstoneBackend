@@ -11,7 +11,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-
+//This Model class handles the exportation of troopers into a formatted pdf.
 public class DataPDFExporter {
     private List<Player> player;
 
@@ -19,6 +19,7 @@ public class DataPDFExporter {
         this.player = player;
     }
 
+    //This method deals with writing the header of the pdf document and table header labels
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
         cell.setBackgroundColor(Color.BLUE);
@@ -37,7 +38,7 @@ public class DataPDFExporter {
         table.addCell(cell);
 
     }
-
+    //This method populates the trooper information to the pdf table.
     private void writeTableData(PdfPTable table) {
         for (Player player : this.player) {
             table.addCell(String.valueOf(player.getNum()));
@@ -46,7 +47,7 @@ public class DataPDFExporter {
 
         }
     }
-
+    //This method builds the pdf by calling the writeTableHeader and writeTableData then completes the formatting.
     public void export(HttpServletResponse response) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
@@ -55,22 +56,21 @@ public class DataPDFExporter {
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
         font.setColor(Color.BLUE);
-
+        //creating and adding the page title
         Paragraph p = new Paragraph("Troop report", font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
-
         document.add(p);
-
+        //formatting the table column widths and spacings
         PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(100f);
         table.setWidths(new float[] {1.5f, 8.5f, 1.5f});
         table.setSpacingBefore(10);
-
+        //Adding the table header and data
         writeTableHeader(table);
         writeTableData(table);
-
+        //adding the table to the document
         document.add(table);
-
+        //Finalising the document
         document.close();
 
     }

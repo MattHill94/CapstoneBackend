@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import java.util.Arrays;
 import java.util.Collection;
 
+/*The following user model is used to store instances of user details
+*when retrieved from the database*/
 @Entity
 @Data
 @NoArgsConstructor(access=AccessLevel.PRIVATE, force=true)
@@ -23,6 +25,7 @@ public class User implements UserDetails {
 
   private static final long serialVersionUID = 1L;
 
+  //mapped with the primary key of the user table on the database
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Long id;
@@ -32,16 +35,11 @@ public class User implements UserDetails {
   private final String fullname;
   private final Boolean isadmin;
 
-
+  //the following methods below are overriden from the spring security userDetails class.
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
   }
-
-
-
-
-
   @Override
   public boolean isAccountNonExpired() {
     return true;
@@ -56,12 +54,8 @@ public class User implements UserDetails {
   public boolean isCredentialsNonExpired() {
     return true;
   }
-
   @Override
   public boolean isEnabled() {
     return true;
   }
-
-
-
 }

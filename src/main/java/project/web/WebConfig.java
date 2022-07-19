@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+//programming requests that you want the DispatcherServlet to handle.
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

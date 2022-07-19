@@ -15,7 +15,4 @@ spring:
     username: root
     password: "your password"
 
-logging:
-  level:
-    tacos: WARN
     

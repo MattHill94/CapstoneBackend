@@ -28,6 +28,7 @@ public class PlayerList {
     public List<Player> getPlayersFromXML(){
         List<Player> players = new LinkedList<>();
         try{
+            //locating the file,  building the URL
             Path filePath = Paths.get("src/main/resources/data.xml");
             File file = new File(String.valueOf(filePath.toAbsolutePath()));
 

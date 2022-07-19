@@ -1,5 +1,6 @@
 package project.troops;
 
+//Model of the trooper, this model will be used to hold information of troopers imported from the XML file
 public class Player {
     private String name;
     private int num;
@@ -10,7 +11,7 @@ public class Player {
         this.num = num;
         this.percentage = percentage;
     }
-
+    //getters - used to access information of the trooper.
     public String getName() {
         return name;
     }
